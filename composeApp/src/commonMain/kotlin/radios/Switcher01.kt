@@ -3,12 +3,12 @@ package radios
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.runtime.*
@@ -187,7 +187,6 @@ private fun PreviewSwitcher() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color.White)
     ) {
         Switcher01(
             isChecked = isChecked,
@@ -203,24 +202,33 @@ class Switcher01 : Screen {
 
     @Composable
     override fun Content() {
-        Column(
+        Surface(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxSize(),
         ) {
             val navigator = LocalNavigator.currentOrThrow
 
-            IconButton(
-                onClick = {
-                    navigator.pop()
-                }
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp)
             ) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Default.ArrowBack,
-                    contentDescription = "Back Press",
-                )
+                IconButton(
+                    onClick = {
+                        navigator.pop()
+                    },
+                    modifier = Modifier
+                        .align(Alignment.TopStart)
+                ) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Default.ArrowBack,
+                        contentDescription = "Back Press",
+                    )
+                }
+
+                PreviewSwitcher()
             }
 
-            PreviewSwitcher()
         }
     }
 }
